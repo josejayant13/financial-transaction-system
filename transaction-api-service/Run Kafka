@@ -1,0 +1,30 @@
+Use this:
+
+```bash
+docker run -d -p 9092:9092 --name kafka apache/kafka
+```
+
+---
+
+## If already created before
+
+Start it again with:
+
+```bash
+docker start kafka
+```
+
+---
+
+## Check if running
+
+```bash
+docker ps
+```
+
+---
+
+### Quick rule
+
+* First time → `docker run`
+* Next time → `docker start kafka`
