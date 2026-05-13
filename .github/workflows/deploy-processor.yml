@@ -1,4 +1,4 @@
-name: Delpoy API Service
+name: Delpoy Processor Service
 
 on:
   push:
