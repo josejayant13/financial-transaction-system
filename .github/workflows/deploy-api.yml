@@ -1,1 +1,46 @@
+name: Delpoy API Service
 
+on:
+  push:
+    paths:
+      -  'transaction-api-service/**'
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credential@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build JAR
+        run: |
+          cd transaction-api-service
+          mvn clean package
+
+      - name: Build Docker image
+        run: |
+          cd transaction-api-service
+          docker build -t transaction-api-service .
+
+      - name: Tag Docker image
+        run: |
+          docker tag transaction-api-service:latest 565224613279.dkr.ecr.ap-south-2.amazonaws.com/transaction-api-service:latest
+
+      - name: Push Docker image
+        run: |
+          docker push 565224613279.dkr.ecr.ap-south-2.amazonaws.com/transaction-api-service:latest
