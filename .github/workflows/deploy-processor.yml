@@ -41,7 +41,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd transaction-processor-service
-          docker build -t transaction-api-service .
+          docker build -t transaction-processor-service .
 
       - name: Tag Docker image
         run: |
