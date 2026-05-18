@@ -15,7 +15,7 @@ public class TransactionProcessorApplication {
 		SpringApplication.run(TransactionProcessorApplication.class, args);
 
 		System.out.println("------------App is online-------------");
-//		test
+//		test2
 	}
 
 }
